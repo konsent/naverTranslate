@@ -5,12 +5,16 @@ package com.konsent.navertranslate.utils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+
+import com.konsent.navertranslate.model.TranslateRequestDto;
 import org.springframework.http.*;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
 import java.util.Map;
 
-
+@Component
 public class NaverTranslate {
     public String search(String inputLang, String outputLang, String text) {
         RestTemplate rest = new RestTemplate();
@@ -32,18 +36,14 @@ public class NaverTranslate {
 //        System.out.println(response);
         return response;
     }
+//        public TranslateRequestDto fromJSONtoItems(String result){
+//            JSONObject rjson = new JSONObject(result);
+//            JSONArray item = rjson.get(message);
+//        }
 
         public static void main(String[] args) throws JsonProcessingException {
             NaverTranslate naverTranslate = new NaverTranslate();
             String resultJSON = naverTranslate.search("ko", "fr", "베를린에 가보셨나요?");
-
-
-
-
-
-
-
-
-
+            System.out.println(resultJSON);
     }
 }

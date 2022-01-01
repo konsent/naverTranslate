@@ -15,18 +15,18 @@ public class Translate extends Timestamped{
     private String id;
 
     @Column(nullable = false)
-    private String source;
+    private String srcLangType;
 
     @Column(nullable = false)
-    private String target;
+    private String tarLangType;
 
     @Column(nullable = false)
-    private String text;
+    private String translatedText;
 
     public Translate(TranslateRequestDto requestDto){
-        this.source = requestDto.getSource();
-        this.target = requestDto.getTarget();
-        this.text = requestDto.getText();
+        this.srcLangType = requestDto.getSrcLangType();
+        this.tarLangType = requestDto.getTarLangType();
+        this.translatedText = requestDto.getTranslatedText();
     }
 
 }
