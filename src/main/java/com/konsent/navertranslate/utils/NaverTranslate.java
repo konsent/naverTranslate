@@ -5,15 +5,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.konsent.navertranslate.model.TranslateRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @Component
 public class NaverTranslate {
-    public String search(String query){
+    public String search(String query) {
         RestTemplate rest = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
@@ -34,9 +38,22 @@ public class NaverTranslate {
         return response;
     }
 
-        public static void main(String[] args){
-            NaverTranslate naverTranslate = new NaverTranslate();
-            String result = naverTranslate.search("베를린에 가보셨나요?");
-            System.out.println(result);
+    public List<TranslateRequestDto> saveDto(String result) {
+        JSONObject rjson = new JSONObject(result);
+
+
+        List<TranslateRequestDto> DtoList = new ArrayList<>();
+
+
+        return null;
     }
 }
+
+    }
+//
+//        public static void main(String[] args){
+//            NaverTranslate naverTranslate = new NaverTranslate();
+//            String result = naverTranslate.search("베를린에 가보셨나요?");
+//            System.out.println(result);
+//    }
+//}

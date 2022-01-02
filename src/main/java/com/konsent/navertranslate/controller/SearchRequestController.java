@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -16,8 +15,9 @@ public class SearchRequestController {
 
     private final NaverTranslate naverTranslate;
 
-    @PostMapping("/api/searches")
-    public String searchTranslate(@RequestParam String query){
-        return naverTranslate.search(query);
+    @PostMapping("/api/search")
+    public List<TranslateRequestDto> searchTranslate(@RequestParam String query){
+        String result = naverTranslate.search(query);
+        return naverTranslate.saveDto(result);
     }
 }
