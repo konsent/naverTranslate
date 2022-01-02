@@ -1,5 +1,4 @@
 package com.konsent.navertranslate.controller;
-
 import com.konsent.navertranslate.model.Translate;
 import com.konsent.navertranslate.model.TranslateRepository;
 import com.konsent.navertranslate.model.TranslateRequestDto;
@@ -8,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -16,9 +16,8 @@ public class SearchRequestController {
 
     private final NaverTranslate naverTranslate;
 
-    @PostMapping("/api/results")
-    public String searchTranslate(@RequestParam String inputLang, @RequestParam String outputLang, @RequestParam String text){
-        String result = naverTranslate.search(inputLang, outputLang, text);
-        return result;
+    @PostMapping("/api/searches")
+    public String searchTranslate(@RequestParam String query){
+        return naverTranslate.search(query);
     }
 }

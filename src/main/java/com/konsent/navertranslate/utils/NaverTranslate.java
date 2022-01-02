@@ -1,22 +1,19 @@
 package com.konsent.navertranslate.utils;
-
-
-
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.konsent.navertranslate.model.TranslateRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
-import com.konsent.navertranslate.model.TranslateRequestDto;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-
 import java.util.List;
 import java.util.Map;
 
 @Component
 public class NaverTranslate {
-    public String search(String inputLang, String outputLang, String text) {
+    public String search(String query){
         RestTemplate rest = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
@@ -24,7 +21,7 @@ public class NaverTranslate {
         headers.add("X-Naver-Client-Secret", "xfUDH4v2Ai");
 
         StringBuilder sb = new StringBuilder();
-        sb.append("source=" + inputLang + "&target=" + outputLang + "&text=" + text);
+        sb.append("source=ko&target=fr&text=" + query);
         String body = sb.toString();
 
         HttpEntity<String> requestEntity = new HttpEntity<String>(body, headers);
@@ -36,14 +33,10 @@ public class NaverTranslate {
 //        System.out.println(response);
         return response;
     }
-//        public TranslateRequestDto fromJSONtoItems(String result){
-//            JSONObject rjson = new JSONObject(result);
-//            JSONArray item = rjson.get(message);
-//        }
 
-        public static void main(String[] args) throws JsonProcessingException {
+        public static void main(String[] args){
             NaverTranslate naverTranslate = new NaverTranslate();
-            String resultJSON = naverTranslate.search("ko", "fr", "베를린에 가보셨나요?");
-            System.out.println(resultJSON);
+            String result = naverTranslate.search("베를린에 가보셨나요?");
+            System.out.println(result);
     }
 }

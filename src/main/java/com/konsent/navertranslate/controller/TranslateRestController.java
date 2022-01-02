@@ -14,15 +14,15 @@ public class TranslateRestController {
 
     final TranslateRepository translateRepository;
 
-//    @GetMapping("/api/results")
-//    public List<Translate> getResults(){
-//        return translateRepository.findAll();
-//    }
-//
-//    @PostMapping("/api/results")
-//    public Translate createResult(@RequestBody TranslateRequestDto requestDto){
-//        Translate translate = new Translate(requestDto);
-//        return translateRepository.save(translate);
-//    }
+    @GetMapping("/api/results")
+    public List<Translate> getResults(){
+        return translateRepository.findAll();
+    }
+
+    @PostMapping("/api/results")
+    public Translate createResult(@RequestBody TranslateRequestDto requestDto){
+        Translate translate = new Translate(requestDto);
+        return translateRepository.save(translate);
+    }
 
 }

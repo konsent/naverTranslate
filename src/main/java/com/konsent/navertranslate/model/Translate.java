@@ -23,6 +23,7 @@ public class Translate extends Timestamped{
     @Column(nullable = false)
     private String translatedText;
 
+
     public Translate(TranslateRequestDto requestDto){
         this.srcLangType = requestDto.getSrcLangType();
         this.tarLangType = requestDto.getTarLangType();
