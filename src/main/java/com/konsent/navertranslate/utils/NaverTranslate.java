@@ -5,12 +5,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.konsent.navertranslate.model.TranslateRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -28,28 +30,32 @@ public class NaverTranslate {
         sb.append("source=ko&target=fr&text=" + query);
         String body = sb.toString();
 
+
         HttpEntity<String> requestEntity = new HttpEntity<String>(body, headers);
         ResponseEntity<String> responseEntity = rest.exchange("https://openapi.naver.com/v1/papago/n2mt", HttpMethod.POST, requestEntity, String.class);
         HttpStatus httpStatus = responseEntity.getStatusCode();
         int status = httpStatus.value();
         String response = responseEntity.getBody();
-//        System.out.println("Response status: " + status);
-//        System.out.println(response);
+        System.out.println("Response status: " + status);
+        System.out.println(response);
         return response;
     }
 
     public List<TranslateRequestDto> saveDto(String result) {
         JSONObject rjson = new JSONObject(result);
+        JSONArray items = rjson.getJSONArray("message");
+        JSONObject rjson2 = new JSONObject(items);
+        JSONArray items2 = rjson2.getJSONArray("result");
 
 
         List<TranslateRequestDto> DtoList = new ArrayList<>();
 
+        System.out.println(items2);
 
-        return null;
+
+        return DtoList;
     }
 }
-
-    }
 //
 //        public static void main(String[] args){
 //            NaverTranslate naverTranslate = new NaverTranslate();
