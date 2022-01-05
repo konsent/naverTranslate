@@ -36,24 +36,36 @@ public class NaverTranslate {
         HttpStatus httpStatus = responseEntity.getStatusCode();
         int status = httpStatus.value();
         String response = responseEntity.getBody();
-        System.out.println("Response status: " + status);
-        System.out.println(response);
+//        System.out.println("Response status: " + status);
+//        System.out.println(response);
         return response;
     }
 
-    public List<TranslateRequestDto> saveDto(String result) {
+    public String saveDto(String result) {
         JSONObject rjson = new JSONObject(result);
-        JSONArray items = rjson.getJSONArray("message");
-        JSONObject rjson2 = new JSONObject(items);
-        JSONArray items2 = rjson2.getJSONArray("result");
+        JSONObject messageJSON = rjson.getJSONObject("message");
+        JSONObject resultJSON = messageJSON.getJSONObject("result");
+        String textJSON = resultJSON.getString("translatedText");
 
+//        JSONArray results = new JSONArray(rjsonString);
+//
+//        String finalResult = null;
+//
+//        for(int i=0; i<results.length();i++){
+//            JSONObject inner = results.getJSONObject(i);
+//            String inner2 = (String) inner.get("translatedText");
+//            finalResult = inner2;
+//        }
+//        System.out.println(resultJSON);
 
-        List<TranslateRequestDto> DtoList = new ArrayList<>();
+//        List<TranslateRequestDto> List = new ArrayList<>();
 
-        System.out.println(items2);
-
-
-        return DtoList;
+//        for(int i=0; i<3; i++){
+//            JSONObject translatedJSON = results.getJSONObject(i);
+//            TranslateRequestDto requestDto = new TranslateRequestDto(translatedJSON);
+//            List.add(requestDto);
+//        }
+        return textJSON;
     }
 }
 //
@@ -61,5 +73,18 @@ public class NaverTranslate {
 //            NaverTranslate naverTranslate = new NaverTranslate();
 //            String result = naverTranslate.search("베를린에 가보셨나요?");
 //            System.out.println(result);
+//    }
+//}
+//{"message":
+//    {"@type":"response",
+//    "@service":"naverservice.nmt.proxy",
+//    "@version":"1.0.0",
+//    "result":
+//        {"srcLangType":"ko",
+//        "tarLangType":"fr",
+//        "translatedText":"Un ordinateur portable.",
+//        "engineType":"N2MT",
+//        "pivot":null
+//        }
 //    }
 //}

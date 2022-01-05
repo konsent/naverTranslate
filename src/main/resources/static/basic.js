@@ -16,11 +16,25 @@ function searchTranslate() {
     }
     $.ajax({
         type: 'POST',
-        url: `/api/search?source=ko&target=fr&text=${query}`,
+        url: `/api/search?query=${query}`,
         success: function (response) {
             $('#translated').empty();
-            $('#translated').append(response);
+            let tempHtml = addHTML(response);
+            $('#translated').append(tempHtml);
         }
     })
 
+}
+
+function addHTML(response) {
+    /**
+     * class="search-itemDto" 인 녀석에서
+     * image, title, lprice, addProduct 활용하기
+     * 참고) onclick='addProduct(${JSON.stringify(itemDto)})'
+     */
+    return `<div class="search-itemDto">
+        <div class="search-itemDto-center">
+            <div>${response}</div>
+        </div>
+    </div>`
 }

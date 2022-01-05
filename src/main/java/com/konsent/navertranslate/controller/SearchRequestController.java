@@ -16,8 +16,9 @@ public class SearchRequestController {
     private final NaverTranslate naverTranslate;
 
     @PostMapping("/api/search")
-    public List<TranslateRequestDto> searchTranslate(@RequestParam String query){
+    public String searchTranslate(@RequestParam String query){
         String result = naverTranslate.search(query);
+//        System.out.println(result);
         return naverTranslate.saveDto(result);
     }
 }
