@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    // id 가 query 인 녀석 위에서 엔터를 누르면 execSearch() 함수를 실행하라는 뜻입니다.
     $('#query').on('keypress', function (e) {
         if (e.key == 'Enter') {
             searchTranslate();
@@ -20,21 +19,14 @@ function searchTranslate() {
         success: function (response) {
             $('#translated').empty();
             let tempHtml = addHTML(response);
-            $('#translated').append(tempHtml);
+            $('#translated').append(response);
         }
     })
-
 }
 
 function addHTML(response) {
-    /**
-     * class="search-itemDto" 인 녀석에서
-     * image, title, lprice, addProduct 활용하기
-     * 참고) onclick='addProduct(${JSON.stringify(itemDto)})'
-     */
     return `<div class="search-itemDto">
-        <div class="search-itemDto-center">
-            <div>${response}</div>
-        </div>
+            <div>
+            <TEXTAREA ROWS="5", COLS="25">${response}</TEXTAREA>
     </div>`
 }
